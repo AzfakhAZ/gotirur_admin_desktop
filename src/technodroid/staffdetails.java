@@ -27,7 +27,6 @@ public class staffdetails extends javax.swing.JFrame {
     public staffdetails() {
         initComponents();
 
-        
         try {
             com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
             java.sql.Statement S = C.createStatement();
@@ -40,7 +39,6 @@ public class staffdetails extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
         try {
             com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
@@ -58,42 +56,34 @@ public class staffdetails extends javax.swing.JFrame {
                 v.add(r.getString(6));
                 v.add(r.getString(7));
                 v.add(r.getString(4));
- v.add(r.getString(5));
+                v.add(r.getString(5));
                 t.addRow(v);
             }
-            
-            
 
             // TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-       
         try {
-          com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
             java.sql.Statement S = C.createStatement();
-             ResultSet r = S.executeQuery("select * from `service`");
-
+            ResultSet r = S.executeQuery("SELECT DISTINCT `id`,`date`,`billno`,`billtype`,`price` FROM `bill`");
             DefaultTableModel t = (DefaultTableModel) jTable3.getModel();
-            while (jTable3.getRowCount() != 0) {
-                t.removeRow(0);
-            }
             while (r.next()) {
-
                 Vector v = new Vector();
-                v.add(1+1);
-
-                v.add(r.getString(2));
-                v.add(r.getString(6));
-                v.add(r.getString(3));
                 
 
+                v.add(r.getString(1));
+                v.add(r.getString(2));
+                v.add(r.getString(3));
+                v.add(r.getString(4));
+                v.add(r.getString(5));
+              
                 t.addRow(v);
 
-            }  
-            
-           
+            }
+
 
             // TODO add your handling code here:
         } catch (SQLException ex) {
@@ -175,25 +165,25 @@ public class staffdetails extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Show");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 100, 40));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 100, 40));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Grouth Details");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 990, 40));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 990, 40));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "SiNO", "Date", "billno", "Person", "Grouth"
+                "SiNO", "Date", "billno", "Bill type", "Person", "Grouth"
             }
         ));
         jScrollPane3.setViewportView(jTable3);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 360, 960, 210));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 360, 970, 210));
 
         show.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Person" }));
         show.addItemListener(new java.awt.event.ItemListener() {
@@ -201,9 +191,9 @@ public class staffdetails extends javax.swing.JFrame {
                 showItemStateChanged(evt);
             }
         });
-        getContentPane().add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 240, 40));
+        getContentPane().add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 240, 40));
 
-        jButton4.setText("Back");
+        jButton4.setText("Cancel");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -252,40 +242,32 @@ public class staffdetails extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void showItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_showItemStateChanged
- try {
+        try {
             com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
             java.sql.Statement S = C.createStatement();
-            ResultSet r = S.executeQuery("select * from service where person='" + show.getSelectedItem().toString() + "'");
-
+            
+            ResultSet r = S.executeQuery("SELECT DISTINCT `billno`,`billtype`,`date`,`custemername`,`contactno`,`gstno`,`service`,`productname`,`price` FROM `bill`");
             DefaultTableModel t = (DefaultTableModel) jTable3.getModel();
-            while (jTable3.getRowCount() != 0) {
-                t.removeRow(0);
-            }
             while (r.next()) {
-                 
                 Vector v = new Vector();
-                v.add(1+1);
 
+                v.add(r.getString(1));
                 v.add(r.getString(2));
-                v.add(r.getString(6));
-                v.add(r.getString(3));
+                v.add(r.getString(12));
+                v.add(r.getString(11));
+                v.add(r.getString(10));
                
-                
-
                 t.addRow(v);
 
-                
-
             }
-
-            // TODO add your handling code here:
+             // TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_showItemStateChanged
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
- ProcessBuilder b = new ProcessBuilder("calc.exe");
+        ProcessBuilder b = new ProcessBuilder("calc.exe");
         try {
             Process p = b.start();// TODO add your handling code here:
         } catch (IOException ex) {
@@ -294,7 +276,7 @@ public class staffdetails extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-ProcessBuilder b = new ProcessBuilder("notepad.exe");
+        ProcessBuilder b = new ProcessBuilder("notepad.exe");
         try {
             Process p = b.start();// TODO add your handling code here:
         } catch (IOException ex) {
@@ -303,13 +285,12 @@ ProcessBuilder b = new ProcessBuilder("notepad.exe");
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-main m=new main();
-m.setVisible(true);
-this.dispose();// TODO add your handling code here:
+       
+        this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       if (jTable1.getSelectedRowCount() == 0) {
+        if (jTable1.getSelectedRowCount() == 0) {
             JOptionPane.showMessageDialog(rootPane, "please select item");
         } else {
 
@@ -320,31 +301,28 @@ this.dispose();// TODO add your handling code here:
                     jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString(),
                     jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString(),
                     jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString(),
-            jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString());
-                    
-            
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString());
 
             s.setVisible(true);
         } // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
- 
+
         if (jTable1.getSelectedRowCount() == 0) {
             JOptionPane.showMessageDialog(rootPane, "please select item");
         } else {
 
-        
-        try {
-            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
-            java.sql.Statement S = C.createStatement();
+            try {
+                com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+                java.sql.Statement S = C.createStatement();
 
-            S.executeUpdate("DELETE FROM `staff` WHERE id=" + jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
-            JOptionPane.showMessageDialog(rootPane, " delete sucssessfully");
-        } catch (SQLException ex) {
-            Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
+                S.executeUpdate("DELETE FROM `staff` WHERE id=" + jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+                JOptionPane.showMessageDialog(rootPane, " delete sucssessfully");
+            } catch (SQLException ex) {
+                Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
 
-        } 
+            }
         }// TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 

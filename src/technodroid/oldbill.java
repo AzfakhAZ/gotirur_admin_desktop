@@ -28,18 +28,20 @@ public class oldbill extends javax.swing.JFrame {
         try {
             com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
             java.sql.Statement S = C.createStatement();
-            ResultSet r = S.executeQuery("select * from `bill`");
+            ResultSet r = S.executeQuery("SELECT DISTINCT `billno`,`billtype`,`date`,`custemername`,`contactno`,`gstno`,`service`,`productname`,`price` FROM `bill`");
             DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
             while (r.next()) {
                 Vector v = new Vector();
-                v.add(r.getString(11));
 
-                v.add(r.getString(12));
+                v.add(r.getString(1));
                 v.add(r.getString(2));
                 v.add(r.getString(3));
                 v.add(r.getString(4));
                 v.add(r.getString(5));
                 v.add(r.getString(6));
+                v.add(r.getString(7));
+                v.add(r.getString(8));
+                v.add(r.getString(9));
 
                 t.addRow(v);
 
@@ -48,6 +50,11 @@ public class oldbill extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
         }
+        double totel = 0;
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            totel = totel + Double.parseDouble(jTable1.getValueAt(i, 8).toString());
+        }
+        gtotel.setText(String.valueOf(totel));
     }
 
     /**
@@ -64,10 +71,10 @@ public class oldbill extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         searchbox = new javax.swing.JTextField();
         show = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        gtotel = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        billtype = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -88,27 +95,27 @@ public class oldbill extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Bill Type", "Billno", "Date", "custemername", "contact", "gstno", "service"
+                "Billno", "Bill Type", "Date", "custemername", "contact", "gstno", "service", "Product", "Amount"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 960, 450));
 
-        jButton1.setText("Back");
+        jButton1.setText("Cancel");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, 90, 30));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 600, 110, 30));
 
         searchbox.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 searchboxKeyPressed(evt);
             }
         });
-        getContentPane().add(searchbox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 310, 40));
+        getContentPane().add(searchbox, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 310, 40));
 
         show.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Show Item", "Date", "Billno", "Bill Type", " " }));
         show.addItemListener(new java.awt.event.ItemListener() {
@@ -116,28 +123,35 @@ public class oldbill extends javax.swing.JFrame {
                 showItemStateChanged(evt);
             }
         });
-        getContentPane().add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 210, 40));
+        getContentPane().add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 210, 40));
 
-        jButton2.setText("View");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        gtotel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                gtotelActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, 90, 30));
+        getContentPane().add(gtotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 530, 150, 30));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 540, 100, 30));
-
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Total");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 540, 60, 30));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 530, 120, 30));
 
-        jButton3.setText("Update");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 530, -1, 30));
+        jButton3.setText("Refresh");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 600, 110, 30));
+
+        billtype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SHOW BILL TYPE", "Credit Bill", "Cash Bill" }));
+        billtype.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                billtypeItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(billtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 20, 200, 40));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/technodroid/wall.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 680));
@@ -179,18 +193,13 @@ public class oldbill extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        main m = new main();
-        m.setVisible(true);
+
         this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void gtotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gtotelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_gtotelActionPerformed
 
     private void showItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_showItemStateChanged
 
@@ -228,7 +237,7 @@ public class oldbill extends javax.swing.JFrame {
     }//GEN-LAST:event_showItemStateChanged
 
     private void searchboxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchboxKeyPressed
-                   if (evt.getKeyCode() == 10) {
+        if (evt.getKeyCode() == 10) {
             String sql = null;
             if (show.getSelectedItem().equals("Billno")) {
                 sql = "select * from `bill` where billno like '" + searchbox.getText() + "%'";
@@ -242,7 +251,7 @@ public class oldbill extends javax.swing.JFrame {
                 sql = "select * from `insert` where date like '" + searchbox.getText() + "%'";
 
             }
-            
+
             try {
                 com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
                 java.sql.Statement S = C.createStatement();
@@ -252,29 +261,36 @@ public class oldbill extends javax.swing.JFrame {
                     t.removeRow(0);
                 }
                 while (r.next()) {
-                   Vector v = new Vector();
-                v.add(r.getString(11));
+                    Vector v = new Vector();
+                    v.add(r.getString(12));
 
-                v.add(r.getString(12));
-                v.add(r.getString(2));
-                v.add(r.getString(3));
-                v.add(r.getString(4));
-                v.add(r.getString(5));
-                v.add(r.getString(6));
-
-                t.addRow(v);
+                    v.add(r.getString(11));
+                    v.add(r.getString(2));
+                    v.add(r.getString(3));
+                    v.add(r.getString(4));
+                    v.add(r.getString(5));
+                    v.add(r.getString(6));
+                    v.add(r.getString(7));
+                    v.add(r.getString(10));
+                    t.addRow(v);
 
                 }
 
             } catch (SQLException ex) {
                 Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } 
+            double totel = 0;
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                totel = totel + Double.parseDouble(jTable1.getValueAt(i, 8).toString());
+            }
+            gtotel.setText(String.valueOf(totel));
+        }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_searchboxKeyPressed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
- ProcessBuilder b = new ProcessBuilder("notepad.exe");
+        ProcessBuilder b = new ProcessBuilder("notepad.exe");
         try {
             Process p = b.start();// TODO add your handling code here:
         } catch (IOException ex) {
@@ -283,13 +299,52 @@ public class oldbill extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-ProcessBuilder b = new ProcessBuilder("calc.exe");
+        ProcessBuilder b = new ProcessBuilder("calc.exe");
         try {
             Process p = b.start();// TODO add your handling code here:
         } catch (IOException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        oldbill o = new oldbill();
+        o.setVisible(true);
+        this.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void billtypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_billtypeItemStateChanged
+        try {
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
+            ResultSet r = S.executeQuery("select * from bill where billtype='" + billtype.getSelectedItem().toString() + "'");
+
+            DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+            while (jTable1.getRowCount() != 0) {
+                t.removeRow(0);
+            }
+            while (r.next()) {
+                Vector v = new Vector();
+                v.add(r.getString(12));
+
+                v.add(r.getString(11));
+                v.add(r.getString(2));
+                v.add(r.getString(3));
+                v.add(r.getString(4));
+                v.add(r.getString(5));
+                v.add(r.getString(6));
+                v.add(r.getString(7));
+                v.add(r.getString(10));
+                t.addRow(v);
+
+            }
+
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_billtypeItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -327,8 +382,9 @@ ProcessBuilder b = new ProcessBuilder("calc.exe");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> billtype;
+    private javax.swing.JTextField gtotel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -341,7 +397,6 @@ ProcessBuilder b = new ProcessBuilder("calc.exe");
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField searchbox;
     private javax.swing.JComboBox<String> show;
     // End of variables declaration//GEN-END:variables

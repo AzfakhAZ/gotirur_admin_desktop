@@ -445,8 +445,7 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        main m = new main();
-        m.setVisible(true);
+       
         this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 

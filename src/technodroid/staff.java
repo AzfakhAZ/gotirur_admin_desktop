@@ -133,7 +133,7 @@ resume.setText(resume1);
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 130, 40));
         getContentPane().add(contactno, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 160, 40));
 
-        jButton2.setText("Back");
+        jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -182,8 +182,7 @@ this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-main m=new main();
-m.setVisible(true);
+
 this.dispose();
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed

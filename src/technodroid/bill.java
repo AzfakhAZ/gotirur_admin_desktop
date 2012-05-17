@@ -171,6 +171,8 @@ public class bill extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -178,23 +180,20 @@ public class bill extends javax.swing.JFrame {
         cn = new javax.swing.JTextField();
         cname = new javax.swing.JTextField();
         gst = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
+        billno = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
-        billno = new javax.swing.JTextField();
         gtotel = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         billtype = new javax.swing.JComboBox<>();
-        jButton6 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -210,58 +209,67 @@ public class bill extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("COMPANY NAME");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 340, 20));
+        jLabel1.setText("CREATE A NEW BILL");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 340, 30));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("GST                       :");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 140, 20));
+        jLabel2.setText("TIRUR ROAD THAZHEPPALAM ,676101");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 270, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("afsjk41fghjlj658");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 250, 20));
+        jLabel3.setText("Malappuram, Kerala");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 130, 20));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Assosciate computer security system");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 290, 20));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 340, 20));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("Company            :");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 160, 20));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setText("Contact NO :9072071405");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 220, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 480, 70));
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel11.setText("GST NUMBER : ABC!23DEF09LK");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 230, 20));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel14.setText("Email : azfakht@gmail.com");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 210, 20));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 480, 160));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("GST                            :");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 150, 30));
+        jLabel4.setText("GST NUMBER");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 150, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setText("Costemer Name      :");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 150, 30));
+        jLabel7.setText("BILL NO");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 80, 40));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Contact Nomber         :");
+        jLabel8.setText("CUSTOMER NAME");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 160, 30));
-        jPanel2.add(cn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 280, 30));
-        jPanel2.add(cname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 280, 30));
-        jPanel2.add(gst, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 280, 30));
+        jPanel2.add(cn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 280, 30));
+        jPanel2.add(cname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 280, 30));
+        jPanel2.add(gst, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 280, 30));
+        jPanel2.add(billno, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 130, 40));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 480, 160));
-
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Places ANd details");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 240, -1));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Date");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 100, 40));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 80, 40));
+        jPanel2.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 140, 40));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("CONTACT NUMBER");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 150, 30));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 470, 200));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -275,7 +283,7 @@ public class bill extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 960, 250));
 
-        jButton1.setText("Back");
+        jButton1.setText("Cancel");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -297,20 +305,13 @@ public class bill extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 220, 30));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Bill No");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 90, 40));
-        getContentPane().add(billno, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 130, 40));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 230, 30));
         getContentPane().add(gtotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 500, 130, 30));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Total");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 500, 110, 30));
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 170, 40));
 
         jButton4.setText("Add Product");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -318,7 +319,7 @@ public class bill extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 213, 220, 30));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 230, 30));
 
         jButton5.setText("Refresh");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -326,25 +327,10 @@ public class bill extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 600, 100, 30));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 510, 100, 30));
 
         billtype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Bill Type", "Cash Bill", "Credit Bill" }));
         getContentPane().add(billtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 550, 150, 30));
-
-        jButton6.setText("Remove");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 600, 100, 30));
-
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField1KeyPressed(evt);
-            }
-        });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 260, 40));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/technodroid/wall.jpg"))); // NOI18N
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 1000, 710));
@@ -405,8 +391,7 @@ public class bill extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        main m = new main();
-        m.setVisible(true);
+       
         this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -481,31 +466,6 @@ public class bill extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-//if (jTable1.getSelectedRowCount() == 0) {
-//    
-//            JOptionPane.showMessageDialog(rootPane, "please select item");
-//        } else {
-//
-//        String sql = null;
-//        try {
-//            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
-//            java.sql.Statement S = C.createStatement();
-//ResultSet r = S.executeQuery(sql);
-//                DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-//                while (jTable1.getRowCount() != 0) {
-//                   // t.removeRow(0);
-//                   t.removeRow(0);
-//                }
-//            
-//            JOptionPane.showMessageDialog(rootPane, " remove sucssessfully");
-//        } catch (SQLException ex) {
-//            Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
-//
-//        } 
-//        }        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
        // TODO add your handling code here:
     }//GEN-LAST:event_jMenu2ActionPerformed
@@ -527,10 +487,6 @@ ProcessBuilder b = new ProcessBuilder("calc.exe");
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }               // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -579,13 +535,13 @@ ProcessBuilder b = new ProcessBuilder("calc.exe");
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -603,7 +559,6 @@ ProcessBuilder b = new ProcessBuilder("calc.exe");
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
     private void generate_bill_no() {
