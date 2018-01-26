@@ -158,6 +158,11 @@ public class main extends javax.swing.JFrame {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 580, -1, 30));
 
         jButton3.setText("Delete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 580, 70, 30));
 
         category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Category", "Category", " " }));
@@ -473,6 +478,19 @@ b.setVisible(true);// TODO add your handling code here:
     private void searchboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchboxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchboxActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+try {
+                com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+                java.sql.Statement S = C.createStatement();
+
+                S.executeUpdate("DELETE FROM `insert` WHERE id="+jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+                JOptionPane.showMessageDialog(rootPane, " delete sucssessfully");
+            } catch (SQLException ex) {
+                Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
+
+            }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

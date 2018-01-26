@@ -5,6 +5,14 @@
  */
 package technodroid;
 
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
@@ -16,6 +24,73 @@ public class bill extends javax.swing.JFrame {
      */
     public bill() {
         initComponents();
+    }
+
+    bill(String text, String text0, String text1, String text2, Vector service, Vector product, Vector quantity, Vector tax, Vector price, int ser) {
+        initComponents();
+
+        DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        int i;
+        double totel = 0;
+        for (i = 0; i < service.size(); i++) {
+            Vector v = new Vector();
+            v.add(i + 1);
+
+            v.add(service.get(i));
+
+            v.add(product.get(i));
+            v.add(quantity.get(i));
+            v.add(tax.get(i));
+            v.add(price.get(i));
+            v.add(Integer.parseInt(quantity.get(i).toString()) * Double.parseDouble(price.get(i).toString()));
+            totel = totel + Integer.parseInt(quantity.get(i).toString()) * Double.parseDouble(price.get(i).toString());
+            t.addRow(v);
+
+        }
+
+        Vector v = new Vector();
+        v.add(i + 1);
+
+        v.add("");
+        v.add(text);
+        v.add(text2);
+        v.add(text0);
+        v.add(text1);
+        v.add(Integer.parseInt(text2) * Double.parseDouble(text1));
+
+        t.addRow(v);
+        totel = totel + Integer.parseInt(text2) * Double.parseDouble(text1);
+        gtotel.setText(String.valueOf(totel));
+//        try {
+//                com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+//                java.sql.Statement S = C.createStatement();
+//                ResultSet r = S.executeQuery("select * from `insert`");
+//                DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+//                while (jTable1.getRowCount() != 0) {
+//                    t.removeRow(0);
+//                }
+//                while (r.next()) {
+//                    Vector v = new Vector();
+//                    v.add(r.getString(1));
+//                    
+//                    v.add(r.getString(2));
+//                    v.add(r.getString(4));
+//                    v.add(r.getString(5));
+//                    v.add(r.getString(6));
+//                    v.add(r.getString(7));
+//                    v.add(r.getString(10));
+//                    v.add(r.getString(9));
+//                    v.add(r.getString(12));
+//                     v.add(r.getString(8));
+//                     v.add(r.getString(13));
+//                    t.addRow(v);
+//
+//                }
+//
+//            } catch (SQLException ex) {
+//                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+        //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -49,7 +124,7 @@ public class bill extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        gtotel = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jButton4 = new javax.swing.JButton();
@@ -117,7 +192,7 @@ public class bill extends javax.swing.JFrame {
 
             },
             new String [] {
-                "SI No", "Service Charge", "Product Name", "Company Name", "Details", "Quantity", "Tax", "Price", "Total"
+                "SI No", "Service Charge", "Product", "Quantity", "Tax", "Price", "Total"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -147,7 +222,7 @@ public class bill extends javax.swing.JFrame {
         jLabel11.setText("Bill No");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 90, 40));
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 130, 40));
-        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 500, 110, 30));
+        getContentPane().add(gtotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 500, 110, 30));
 
         jLabel12.setText("Total");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 500, 110, 30));
@@ -176,25 +251,39 @@ public class bill extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-service s=new service();
-s.setVisible(true);// TODO add your handling code here:
+        service s = new service();
+        s.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-main m=new main();
-m.setVisible(true);
-this.dispose();// TODO add your handling code here:
+        main m = new main();
+        m.setVisible(true);
+        this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-billitems b=new billitems();
-b.setVisible(true);        // TODO add your handling code here:
+        Vector serVector = new Vector();
+        Vector product = new Vector();
+        Vector quantity = new Vector();
+        Vector tax = new Vector();
+        Vector price = new Vector();
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            serVector.add(jTable1.getValueAt(i, 1).toString());
+            product.add(jTable1.getValueAt(i, 2).toString());
+            quantity.add(jTable1.getValueAt(i, 3).toString());
+            tax.add(jTable1.getValueAt(i, 4).toString());
+            price.add(jTable1.getValueAt(i, 5).toString());
+
+        }
+        int ser = jTable1.getRowCount();
+        billitems b = new billitems(serVector, product, quantity, tax, price, ser);
+        b.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-bill b=new bill();
-b.setVisible(true);
-this.dispose();        // TODO add your handling code here:
+        bill b = new bill();
+        b.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -233,6 +322,7 @@ this.dispose();        // TODO add your handling code here:
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField gtotel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -260,6 +350,5 @@ this.dispose();        // TODO add your handling code here:
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }

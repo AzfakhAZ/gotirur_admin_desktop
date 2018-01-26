@@ -5,6 +5,7 @@
  */
 package technodroid;
 
+import java.awt.event.KeyEvent;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,11 +21,23 @@ import javax.swing.table.DefaultTableModel;
  */
 public class billitems extends javax.swing.JFrame {
 
+    private int ini_flag = 0;
+    Vector service1,product1,quantity1,tax1,price1;
+    int ser1;
     /**
      * Creates new form billitems
      */
     public billitems() {
         initComponents();
+    }
+    public billitems(Vector service,Vector product,Vector quantity,Vector tax,Vector price,int ser) {
+        initComponents();
+        service1=service;
+        product1=product;
+        quantity1=quantity;
+        tax1=tax;
+        price1=price;
+        ser1=ser;
     }
 
     /**
@@ -52,6 +65,7 @@ public class billitems extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        showitem = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(500, 600));
@@ -71,21 +85,32 @@ public class billitems extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 120, 40));
         getContentPane().add(price, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 270, 100, 40));
 
+        productname.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                productnameFocusGained(evt);
+            }
+        });
         productname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                productnameKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                productnameKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 productnameKeyTyped(evt);
             }
         });
-        getContentPane().add(productname, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 290, 40));
+        getContentPane().add(productname, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 290, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Company Name");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 120, 40));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 120, 40));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Details");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 130, 40));
-        getContentPane().add(companyname, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 290, 40));
+        getContentPane().add(companyname, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 290, 40));
         getContentPane().add(details, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 290, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -106,7 +131,7 @@ public class billitems extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 90, 30));
 
-        jButton2.setText("Clear");
+        jButton2.setText("Refresh");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -122,28 +147,157 @@ public class billitems extends javax.swing.JFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, 100, 30));
 
+        showitem.setEditable(true);
+        showitem.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                showitemItemStateChanged(evt);
+            }
+        });
+        showitem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                showitemKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                showitemKeyTyped(evt);
+            }
+        });
+        getContentPane().add(showitem, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 290, 0));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-bill b=new bill();
-b.setVisible(true);
-this.dispose();// TODO add your handling code here:
+        bill b = new bill();
+        b.setVisible(true);
+        this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-billitems b=new billitems();
-b.setVisible(true);
-this.dispose();// TODO add your handling code here:
+        billitems b = new billitems();
+        b.setVisible(true);
+        this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    // TODO add your handling code here:
+        bill b = new bill(productname.getText(),tax.getText(),price.getText(),quantity.getText(),service1,product1,quantity1,tax1,price1,ser1);
+        b.setVisible(true);
+        this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void productnameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productnameKeyTyped
-            // TODO add your handling code here:
+//        System.out.println(productname.getText());
+//        showitem.showPopup();
     }//GEN-LAST:event_productnameKeyTyped
+
+    private void productnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productnameKeyPressed
+
+
+    }//GEN-LAST:event_productnameKeyPressed
+
+    private void productnameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productnameKeyReleased
+//        System.out.println(productname.getText());
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            showitem.hidePopup();
+//            companyname.requestFocus();
+//        }
+        if (!productname.getText().isEmpty()) {
+            if (evt.getKeyCode() != KeyEvent.VK_ENTER) {
+                try {
+                    showitem.removeAll();
+
+                    String name = productname.getText();
+                    String name_query = name + '%';
+                    System.out.println("select * from `insert` where productname like '" + name_query + "'");
+
+                    com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+                    java.sql.Statement S = C.createStatement();
+                    ResultSet r = S.executeQuery("select * from `insert` where productname like '" + productname.getText() + "%'");
+                    while (r.next()) {
+                        showitem.addItem(r.getString("productname"));
+                    }
+                    showitem.showPopup();
+                    showitem.requestFocus();
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+//            else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//                productname.setText(showitem.getSelectedItem().toString());
+//                try {
+//                    com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+//                    java.sql.Statement S = C.createStatement();
+//                    ResultSet r = S.executeQuery("select * from `insert` where productname='" + productname.getText() + "'");
+//                    while (r.next()) {
+//                        tax.setText(r.getString("gstvalue"));
+//                        price.setText(r.getString("price"));
+//
+//                    }
+//
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                showitem.removeAll();
+//                showitem.hidePopup();
+//                companyname.requestFocus();
+//            }
+        }
+    }//GEN-LAST:event_productnameKeyReleased
+
+    private void productnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_productnameFocusGained
+//        productname.setText("");
+//        showitem.removeAll();
+        if (ini_flag == 1) {
+            billitems b = new billitems();
+            b.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_productnameFocusGained
+
+    private void showitemItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_showitemItemStateChanged
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showitemItemStateChanged
+
+    private void showitemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_showitemKeyTyped
+        // TODO add your handling code here:
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            productname.setText(showitem.getSelectedItem().toString());
+//            try {
+//                com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+//                java.sql.Statement S = C.createStatement();
+//                ResultSet r = S.executeQuery("select * from `insert` where productname='" + productname.getText() + "'");
+//                while (r.next()) {
+//                    tax.setText(r.getString("gstvalue"));
+//                    price.setText(r.getString("price"));
+//
+//                }
+//            } catch (SQLException ex) {
+//                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+    }//GEN-LAST:event_showitemKeyTyped
+
+    private void showitemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_showitemKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            productname.setText(showitem.getSelectedItem().toString());
+            try {
+                com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+                java.sql.Statement S = C.createStatement();
+                ResultSet r = S.executeQuery("select * from `insert` where productname='" + productname.getText() + "'");
+                while (r.next()) {
+                    tax.setText(r.getString("gstvalue"));
+                    price.setText(r.getString("price"));
+
+                }
+                quantity.requestFocus();
+                ini_flag = 1;
+            } catch (SQLException ex) {
+                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showitemKeyPressed
 
     /**
      * @param args the command line arguments
@@ -196,6 +350,7 @@ this.dispose();// TODO add your handling code here:
     private javax.swing.JTextField price;
     private javax.swing.JTextField productname;
     private javax.swing.JTextField quantity;
+    private javax.swing.JComboBox<String> showitem;
     private javax.swing.JTextField tax;
     // End of variables declaration//GEN-END:variables
 }
