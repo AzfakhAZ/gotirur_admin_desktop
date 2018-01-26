@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,10 +25,64 @@ public class bill extends javax.swing.JFrame {
      */
     public bill() {
         initComponents();
+        try {
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
+            ResultSet r = S.executeQuery("select max(billno) as billno from bill");
+            
+            while (r.next()) {
+                System.out.println(r.getString("billno"));
+                if(r.getString("billno")==null)
+                {
+                    billno.setText("1");
+                }
+                else
+                
+                {
+                    billno.setText(String.valueOf(Integer.parseInt(r.getString("max(billno)"))+1));
+                }
+            }
+
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 
     bill(String text, String text0, String text1, String text2, Vector service, Vector product, Vector quantity, Vector tax, Vector price, int ser) {
         initComponents();
+        try {
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
+            ResultSet r = S.executeQuery("select max(billno) from bill");
+            while (r.next()) {
+                if(r.getString("billno")==null)
+                {
+                    billno.setText("1");
+                }
+                else
+                
+                {
+                    billno.setText(String.valueOf(Integer.parseInt(r.getString("max(billno)"))+1));
+                }
+            }
+
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+//        try {
+//            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+//            java.sql.Statement S = C.createStatement();
+//            ResultSet r = S.executeQuery("select * from gst");
+//            while (r.next()) {
+//                gstcategory.addItem(r.getString("category"));
+//            }
+//
+//            // TODO add your handling code here:
+//        } catch (SQLException ex) {
+//            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
 
         DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
         int i;
@@ -123,7 +178,7 @@ public class bill extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        billno = new javax.swing.JTextField();
         gtotel = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
@@ -208,6 +263,11 @@ public class bill extends javax.swing.JFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, 100, 30));
 
         jButton2.setText("Print");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, 100, 30));
 
         jButton3.setText("Service");
@@ -221,7 +281,7 @@ public class bill extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("Bill No");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 90, 40));
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 130, 40));
+        getContentPane().add(billno, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 130, 40));
         getContentPane().add(gtotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 500, 110, 30));
 
         jLabel12.setText("Total");
@@ -286,6 +346,20 @@ public class bill extends javax.swing.JFrame {
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+            try {
+                com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+                java.sql.Statement S = C.createStatement();
+
+                S.executeUpdate("INSERT INTO `bill`( `billno`, `date`, `custemername`, `contactno`, `gstno`, `servicecharge`, `productname`, `quantity`, `tax`, `price`, `billtype`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12])");
+                JOptionPane.showMessageDialog(rootPane, " insert sucssessfully");
+            } catch (SQLException ex) {
+                Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
+
+            }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -322,6 +396,7 @@ public class bill extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField billno;
     private javax.swing.JTextField gtotel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -349,6 +424,5 @@ public class bill extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
