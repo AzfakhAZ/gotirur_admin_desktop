@@ -8,14 +8,19 @@ package technodroid;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Use
  */
 public class service extends javax.swing.JFrame {
+
+    Vector service1, servicetype1, amount1, person11, person21,selectperson1;
+    int ser1;
 
     /**
      * Creates new form service
@@ -36,6 +41,17 @@ public class service extends javax.swing.JFrame {
         }
     }
 
+    public service(Vector service, Vector servicetype, Vector amount, Vector person1, Vector person2, Vector selectperson, int ser) {
+        initComponents();
+        service1 = service;
+        servicetype1 = servicetype;
+        amount1 = amount;
+        person11 = person1;
+        person21 = person2;
+        selectperson1 = selectperson;
+        ser1 = ser;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,7 +65,7 @@ public class service extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         person2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        service = new javax.swing.JTextField();
+        servicetype = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         amount = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -76,7 +92,7 @@ public class service extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Service");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 190, 40));
-        getContentPane().add(service, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 260, 40));
+        getContentPane().add(servicetype, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 260, 40));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Service Charge");
@@ -104,6 +120,11 @@ public class service extends javax.swing.JFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 70, 30));
 
         jButton2.setText("Add");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, 70, 30));
 
         jButton3.setText("Clear");
@@ -118,16 +139,37 @@ public class service extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-service s=new service();
-s.setVisible(true);
-this.dispose();// TODO add your handling code here:
+        service s = new service();
+        s.setVisible(true);
+        this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-bill b=new bill();
-b.setVisible(true);
-this.dispose();// TODO add your handling code here:
+        bill b = new bill();
+        b.setVisible(true);
+        this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        bill b = new bill(servicetype.getText(), amount.getText(), person1.getText(), person2.getText(), selectperson.getSelectedItem(), service1, servicetype1, amount1, person11, person21, selectperson1, ser1);
+        b.setVisible(true);
+        this.dispose();
+
+        try {
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
+
+            S.executeUpdate("INSERT INTO `service`( `service`, `servicecharge`, `person1`, `person2`, `person`) VALUES ('" + servicetype.getText() + "','" + amount.getText() + "','" + person1.getText() + "','" + person2.getText() + "','" + selectperson.getSelectedItem() + "')");
+
+            JOptionPane.showMessageDialog(rootPane, " insert sucssessfully");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,6 +220,6 @@ this.dispose();// TODO add your handling code here:
     private javax.swing.JTextField person1;
     private javax.swing.JTextField person2;
     private javax.swing.JComboBox<String> selectperson;
-    private javax.swing.JTextField service;
+    private javax.swing.JTextField servicetype;
     // End of variables declaration//GEN-END:variables
 }

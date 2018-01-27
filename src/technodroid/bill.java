@@ -29,24 +29,20 @@ public class bill extends javax.swing.JFrame {
             com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
             java.sql.Statement S = C.createStatement();
             ResultSet r = S.executeQuery("select max(billno) as billno from bill");
-            
+
             while (r.next()) {
                 System.out.println(r.getString("billno"));
-                if(r.getString("billno")==null)
-                {
+                if (r.getString("billno") == null) {
                     billno.setText("1");
-                }
-                else
-                
-                {
-                    billno.setText(String.valueOf(Integer.parseInt(r.getString("max(billno)"))+1));
+                } else {
+                    billno.setText(String.valueOf(Integer.parseInt(r.getString("max(billno)")) + 1));
                 }
             }
 
             // TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
 
     bill(String text, String text0, String text1, String text2, Vector service, Vector product, Vector quantity, Vector tax, Vector price, int ser) {
@@ -56,21 +52,17 @@ public class bill extends javax.swing.JFrame {
             java.sql.Statement S = C.createStatement();
             ResultSet r = S.executeQuery("select max(billno)  as billno from bill");
             while (r.next()) {
-                if(r.getString("billno")==null)
-                {
+                if (r.getString("billno") == null) {
                     billno.setText("1");
-                }
-                else
-                
-                {
-                    billno.setText(String.valueOf(Integer.parseInt(r.getString("max(billno)"))+1));
+                } else {
+                    billno.setText(String.valueOf(Integer.parseInt(r.getString("max(billno)")) + 1));
                 }
             }
 
             // TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
 //        try {
 //            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
 //            java.sql.Statement S = C.createStatement();
@@ -147,6 +139,42 @@ public class bill extends javax.swing.JFrame {
 //            }
         //To change body of generated methods, choose Tools | Templates.
     }
+
+    bill(String text, String text0, String text1, String text2, Object selectedItem, Vector service1, Vector servicetype1, Vector amount1, Vector person11, Vector person21, Vector selectperson1, int ser1) {
+        initComponents();
+           DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        int i;
+        double totel = 0;
+        for (i = 0; i < service1.size(); i++) {
+            Vector v = new Vector();
+            v.add(i + 1);
+
+            v.add(service1.get(i));
+
+            v.add(servicetype1.get(i));
+            v.add(amount1.get(i));
+            v.add(person11.get(i));
+            v.add(person21.get(i));
+             v.add(selectperson1.get(i));
+           
+            t.addRow(v);
+
+        }
+        Vector v = new Vector();
+        v.add(i + 1);
+
+        v.add("");
+        v.add(text);
+        v.add(text2);
+        v.add(text0);
+        v.add(text1);
+        
+
+        t.addRow(v);
+//To change body of generated methods, choose Tools | Templates.
+    }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -347,22 +375,21 @@ public class bill extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        for(int i=0;i<jTable1.getRowCount();i++)   
-        {
-       
-        try {
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+
+            try {
                 com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
                 java.sql.Statement S = C.createStatement();
 
                 S.executeUpdate("INSERT INTO `bill`( `billno`, `date`, `custemername`, `contactno`, `gstno`, `servicecharge`, `productname`, `quantity`,"
-                        + " `tax`, `price`, `billtype`) VALUES ('"+billno.getText()+"','"+jDateChooser1.getDateFormatString()+"','"+cname.getText()+"','"+cn.getText()+"','"+gst.getText()+"','"+jTable1.getValueAt(i, 1).toString()+"'"
-                                + ",'"+jTable1.getValueAt(i, 2).toString()+"','"+jTable1.getValueAt(i, 3).toString()+"','"+jTable1.getValueAt(i, 4).toString()+"','"+jTable1.getValueAt(i, 5).toString()+"','"+billtype.getSelectedItem().toString()+"')");
-                
+                        + " `tax`, `price`, `billtype`) VALUES ('" + billno.getText() + "','" + jDateChooser1.getDateFormatString() + "','" + cname.getText() + "','" + cn.getText() + "','" + gst.getText() + "','" + jTable1.getValueAt(i, 1).toString() + "'"
+                        + ",'" + jTable1.getValueAt(i, 2).toString() + "','" + jTable1.getValueAt(i, 3).toString() + "','" + jTable1.getValueAt(i, 4).toString() + "','" + jTable1.getValueAt(i, 5).toString() + "','" + billtype.getSelectedItem().toString() + "')");
+
             } catch (SQLException ex) {
                 Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
 
             }
-        
+
         }
         JOptionPane.showMessageDialog(rootPane, " insert sucssessfully");
         // TODO add your handling code here:

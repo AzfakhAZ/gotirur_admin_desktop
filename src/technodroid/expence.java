@@ -95,7 +95,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 260, -1));
 
-        person.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Person" }));
+        person.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Person", "Company" }));
         person.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 personActionPerformed(evt);
