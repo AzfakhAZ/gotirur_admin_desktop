@@ -26,13 +26,14 @@ public class main extends javax.swing.JFrame {
      */
     public main() {
         initComponents();
+
         try {
-                com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
-                java.sql.Statement S = C.createStatement();
-                ResultSet r = S.executeQuery("select * from `insert`");
-                DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-                while (r.next()) {
-                    Vector v = new Vector();
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
+            ResultSet r = S.executeQuery("select * from `insert`");
+            DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+            while (r.next()) {
+                Vector v = new Vector();
                 v.add(r.getString(1));
 
                 v.add(r.getString(2));
@@ -43,14 +44,14 @@ public class main extends javax.swing.JFrame {
                 v.add(r.getString(10));
                 v.add(r.getString(6));
                 v.add(r.getString(11));
-               
+
                 t.addRow(v);
 
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -67,15 +68,13 @@ public class main extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         searchbox = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        company = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         category = new javax.swing.JComboBox<>();
-        showitem = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -120,19 +119,6 @@ public class main extends javax.swing.JFrame {
         jLabel1.setText("Show Items");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 120, 30));
 
-        company.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Product", " " }));
-        company.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                companyItemStateChanged(evt);
-            }
-        });
-        company.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                companyActionPerformed(evt);
-            }
-        });
-        getContentPane().add(company, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 200, 30));
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -164,7 +150,7 @@ public class main extends javax.swing.JFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 580, 70, 30));
 
-        category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Category", "Category", " " }));
+        category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Category", "Product", "Date", "Stock", "Price", "Category", " ", " " }));
         category.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 categoryItemStateChanged(evt);
@@ -177,21 +163,13 @@ public class main extends javax.swing.JFrame {
         });
         getContentPane().add(category, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 180, 30));
 
-        showitem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Product", " " }));
-        showitem.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                showitemItemStateChanged(evt);
-            }
-        });
-        showitem.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setText("Refresh");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showitemActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(showitem, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 200, 30));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", " " }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 60, 200, 30));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, 30));
 
         jMenu1.setText("File");
 
@@ -304,74 +282,73 @@ public class main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-ProcessBuilder b=new ProcessBuilder("calc.exe");
+        ProcessBuilder b = new ProcessBuilder("calc.exe");
         try {
-            Process p=b.start();// TODO add your handling code here:
+            Process p = b.start();// TODO add your handling code here:
         } catch (IOException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-      ProcessBuilder b=new ProcessBuilder("notepad.exe");
+        ProcessBuilder b = new ProcessBuilder("notepad.exe");
         try {
-            Process p=b.start();// TODO add your handling code here:
+            Process p = b.start();// TODO add your handling code here:
         } catch (IOException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }  // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-if (jTable1.getSelectedRowCount() == 0) {
+        if (jTable1.getSelectedRowCount() == 0) {
             JOptionPane.showMessageDialog(rootPane, "please select item");
-        }
-        else
-        {
-          
-           insert i=new insert(
-                  jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString(),
-                    jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(),
+        } else {
+
+            insert i = new insert(
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString(),
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString(),
                     jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString(),
-                   
-             jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString(),
-           jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString(),
-           jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString(),
-           jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString(),
-           jTable1.getValueAt(jTable1.getSelectedRow(), 7).toString(),
-                   jTable1.getValueAt(jTable1.getSelectedRow(), 8).toString()
-           );
-          
-                    
-                  
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString(),
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString(),
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString(),
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString(),
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 7).toString(),
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 8).toString()
+            );
+
             i.setVisible(true);
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void companyItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_companyItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_companyItemStateChanged
-
-    private void companyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_companyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_companyActionPerformed
-
 
     private void searchboxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchboxKeyPressed
- if (evt.getKeyCode() == 10) {
+        if (evt.getKeyCode() == 10) {
             String sql = null;
-            if (category.getSelectedItem().equals("Category")) {
-                sql = "select * from `insert` where category like '" + searchbox.getText() + "%'";
-                //showitem.removeAllItems();
+            if (category.getSelectedItem().equals("Product")) {
+                sql = "select * from `insert` where productname like '" + searchbox.getText() + "%'";
+
             }
-            /*if (category.getSelectedItem().equals("electronics")) {
-                sql = "select * from `insert` where electronics like '" + searchbox.getText() + "%'";
-                showitem.removeAllItems();
-            }*/
-           try {
+            if (category.getSelectedItem().equals("Stock")) {
+                sql = "select * from `insert` where stock like '" + searchbox.getText() + "%'";
+
+            }
+            if (category.getSelectedItem().equals("Price")) {
+                sql = "select * from `insert` where price like '" + searchbox.getText() + "%'";
+
+            }
+            if (category.getSelectedItem().equals("Date")) {
+                sql = "select * from `insert` where date like '" + searchbox.getText() + "%'";
+
+            }
+            if (category.getSelectedItem().equals("Category")) {
+                sql = "select * from `insert` where gstcategory like '" + searchbox.getText() + "%'";
+
+            }
+            try {
                 com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
                 java.sql.Statement S = C.createStatement();
-                ResultSet r = S.executeQuery("select * from `insert`");
+                ResultSet r = S.executeQuery(sql);
                 DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
                 while (jTable1.getRowCount() != 0) {
                     t.removeRow(0);
@@ -379,17 +356,16 @@ if (jTable1.getSelectedRowCount() == 0) {
                 while (r.next()) {
                     Vector v = new Vector();
                     v.add(r.getString(1));
-                    
+
                     v.add(r.getString(2));
                     v.add(r.getString(4));
-//                    v.add(r.getString(5));
-//                    v.add(r.getString(6));
+                    v.add(r.getString(5));
+                    v.add(r.getString(8));
                     v.add(r.getString(7));
                     v.add(r.getString(10));
-                    v.add(r.getString(9));
-                    v.add(r.getString(12));
-                     v.add(r.getString(8));
-                     v.add(r.getString(13));
+                    v.add(r.getString(6));
+                    v.add(r.getString(11));
+
                     t.addRow(v);
 
                 }
@@ -397,16 +373,17 @@ if (jTable1.getSelectedRowCount() == 0) {
             } catch (SQLException ex) {
                 Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-       }       // TODO add your handling code here:
+        }
+
+// TODO add your handling code here:
     }//GEN-LAST:event_searchboxKeyPressed
-    
+
     private void categoryItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_categoryItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_categoryItemStateChanged
 
     private void categoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryActionPerformed
-       /*showitem.addItem("Processor");
+        /*showitem.addItem("Processor");
         showitem.addItem("Motherboard");
         showitem.addItem("Ram");
         showitem.addItem("Hard Disk");
@@ -423,56 +400,48 @@ company.addItem("etc..");*/
 // TODO add your handling code here:
     }//GEN-LAST:event_categoryActionPerformed
 
-    private void showitemItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_showitemItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_showitemItemStateChanged
-
-    private void showitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showitemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_showitemActionPerformed
-
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu4ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-expence e=new expence();
-e.setVisible(true);// TODO add your handling code here:
+        expence e = new expence();
+        e.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-insert i=new insert();
-i.setVisible(true);// TODO add your handling code here:
+        insert i = new insert();
+        i.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-bill b=new bill();
-b.setVisible(true);// TODO add your handling code here:
+        bill b = new bill();
+        b.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-oldbill o=new oldbill();
-o.setVisible(true);// TODO add your handling code here:
+        oldbill o = new oldbill();
+        o.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-staff s=new staff();
-s.setVisible(true);// TODO add your handling code here:
+        staff s = new staff();
+        s.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-staffdetails s=new staffdetails();
-s.setVisible(true);// TODO add your handling code here:
+        staffdetails s = new staffdetails();
+        s.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-expencedetails e=new expencedetails();
-e.setVisible(true);// TODO add your handling code here:
+        expencedetails e = new expencedetails();
+        e.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-balencesheet b=new balencesheet();
-b.setVisible(true);// TODO add your handling code here:
+        balencesheet b = new balencesheet();
+        b.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void searchboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchboxActionPerformed
@@ -480,17 +449,23 @@ b.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_searchboxActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-try {
-                com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
-                java.sql.Statement S = C.createStatement();
+        try {
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
 
-                S.executeUpdate("DELETE FROM `insert` WHERE id="+jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
-                JOptionPane.showMessageDialog(rootPane, " delete sucssessfully");
-            } catch (SQLException ex) {
-                Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
+            S.executeUpdate("DELETE FROM `insert` WHERE id=" + jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+            JOptionPane.showMessageDialog(rootPane, " delete sucssessfully");
+        } catch (SQLException ex) {
+            Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
 
-            }        // TODO add your handling code here:
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        main m = new main();
+        m.setVisible(true);
+        this.dispose(); // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -529,11 +504,10 @@ try {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> category;
-    private javax.swing.JComboBox<String> company;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -558,6 +532,5 @@ try {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField searchbox;
-    private javax.swing.JComboBox<String> showitem;
     // End of variables declaration//GEN-END:variables
 }
