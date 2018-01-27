@@ -24,37 +24,90 @@ public class staffdetails extends javax.swing.JFrame {
      */
     public staffdetails() {
         initComponents();
+
         try {
             com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
             java.sql.Statement S = C.createStatement();
-            ResultSet r = S.executeQuery("select * from `staff`");
-             DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+            ResultSet r = S.executeQuery("select * from staff");
             while (r.next()) {
-                //items.addItem(r.getString("name"));
-               
-             
-                    Vector v = new Vector();
-                    v.add(r.getString(1));
-
-                    v.add(r.getString(2));
-                     v.add(r.getString(3));
-                    v.add(r.getString(6));
-                    v.add(r.getString(7));
-                    v.add(r.getString(4));
-                   
-                   
-
-                    t.addRow(v); 
+                items.addItem(r.getString("name"));
             }
 
-            
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
+            ResultSet r = S.executeQuery("select * from staff");
+            while (r.next()) {
+                show.addItem(r.getString("name"));
+            }
 
             // TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-     
+
+        try {
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
+            ResultSet r = S.executeQuery("select * from `staff`");
+            DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+            while (r.next()) {
+                //items.addItem(r.getString("name"));
+
+                Vector v = new Vector();
+                v.add(r.getString(1));
+
+                v.add(r.getString(2));
+                v.add(r.getString(3));
+                v.add(r.getString(6));
+                v.add(r.getString(7));
+                v.add(r.getString(4));
+
+                t.addRow(v);
+            }
+            
+            
+
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+          com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
+             ResultSet r = S.executeQuery("select * from `expence`");
+
+            DefaultTableModel t = (DefaultTableModel) jTable2.getModel();
+            while (jTable2.getRowCount() != 0) {
+                t.removeRow(0);
+            }
+            while (r.next()) {
+
+                Vector v = new Vector();
+                v.add(r.getString(1));
+
+                v.add(r.getString(3));
+                v.add(r.getString(2));
+                v.add(r.getString(5));
+                v.add(r.getString(4));
+
+                t.addRow(v);
+
+            }  
+            
+           
+
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -66,7 +119,6 @@ public class staffdetails extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -77,16 +129,22 @@ public class staffdetails extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        show = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 310, 290, 40));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Staff Details");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 70));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 40));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,47 +156,126 @@ public class staffdetails extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 970, 160));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 970, 150));
 
         jButton1.setText("View");
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 590, 90, 40));
 
         jButton2.setText("Upate");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 250, 90, 30));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 220, 90, 30));
 
-        items.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Item" }));
+        items.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Person" }));
         items.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 itemsItemStateChanged(evt);
             }
         });
-        getContentPane().add(items, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, 290, 40));
+        items.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(items, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 220, 40));
 
         jButton3.setText("Upate");
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 590, 90, 40));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1000, 10));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 1000, 10));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Si NO", "Date", "Expence", "Grouth", "Totel"
+                "SiNO", "Date", "Person", "Expence Amount", "Details"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 970, 210));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 500, 210));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Show");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 280, 100, 40));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Grouth Details");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 460, 40));
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "SiNO", "Date", "Person", "Grouth"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 360, -1, 210));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Expence Detalss");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 510, 40));
+
+        show.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Person" }));
+        show.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                showItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 280, 240, 40));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("Show");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 100, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_itemsItemStateChanged
-      
+
+        try {
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
+            ResultSet r = S.executeQuery("select * from expence where person='" + items.getSelectedItem().toString() + "'");
+
+            DefaultTableModel t = (DefaultTableModel) jTable2.getModel();
+            while (jTable2.getRowCount() != 0) {
+                t.removeRow(0);
+            }
+            while (r.next()) {
+
+                Vector v = new Vector();
+                v.add(r.getString(1));
+
+                v.add(r.getString(3));
+                v.add(r.getString(2));
+                v.add(r.getString(5));
+                v.add(r.getString(4));
+
+                t.addRow(v);
+
+            }
+
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_itemsItemStateChanged
+
+    private void itemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemsActionPerformed
+
+    private void showItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_showItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -181,11 +318,17 @@ public class staffdetails extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JComboBox<String> show;
     // End of variables declaration//GEN-END:variables
 }

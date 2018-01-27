@@ -122,6 +122,11 @@ public class billitems extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton3KeyPressed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, 100, 30));
 
         showitem.setEditable(true);
@@ -268,6 +273,10 @@ public class billitems extends javax.swing.JFrame {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_showitemKeyPressed
+
+    private void jButton3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton3KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3KeyPressed
 
     /**
      * @param args the command line arguments

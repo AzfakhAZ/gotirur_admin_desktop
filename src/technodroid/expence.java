@@ -24,6 +24,18 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
      */
     public expence() {
         initComponents();
+         try {
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
+            ResultSet r = S.executeQuery("select * from staff");
+            while (r.next()) {
+                person.addItem(r.getString("name"));
+            }
+
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -48,7 +60,6 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        expence = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(500, 600));
@@ -82,9 +93,9 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         details.setRows(5);
         jScrollPane1.setViewportView(details);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 260, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 260, -1));
 
-        person.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Food", "Feuvel", "Corrent", "Rent", " " }));
+        person.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Person" }));
         person.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 personActionPerformed(evt);
@@ -116,7 +127,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 510, 80, 30));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 510, 80, 30));
 
         jButton3.setText("Clear");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -124,20 +135,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 510, 80, 30));
-
-        expence.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Food", "Feuvel", "Corrent", "Rent", " " }));
-        expence.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                expenceActionPerformed(evt);
-            }
-        });
-        expence.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                expenceKeyPressed(evt);
-            }
-        });
-        getContentPane().add(expence, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 260, 40));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, 80, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -180,21 +178,13 @@ this.dispose();// TODO add your handling code here:
                 com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
                 java.sql.Statement S = C.createStatement();
                 
-                S.executeUpdate("INSERT INTO `expence`( `person`, `expence`, `date`, `details`, `amount`) VALUES ('" + person.getSelectedItem() + "','" + expence.getSelectedItem() + "','" + sdf.format(jDateChooser1.getDate()) + "','" + details.getText() + "'," + amount.getText() + ")");
+                S.executeUpdate("INSERT INTO `expence`( `person`, `date`, `details`, `amount`) VALUES ('" + person.getSelectedItem() + "','"+sdf.format(jDateChooser1.getDate())+"','"+details.getText()+"'," + amount.getText() + ")");
                 JOptionPane.showMessageDialog(rootPane, " insert sucssessfully");
             } catch (SQLException ex) {
                 Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
 
             } // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void expenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_expenceActionPerformed
-
-    private void expenceKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_expenceKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_expenceKeyPressed
 
     /**
      * @param args the command line arguments
@@ -234,7 +224,6 @@ this.dispose();// TODO add your handling code here:
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField amount;
     private javax.swing.JTextArea details;
-    private javax.swing.JComboBox<String> expence;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
