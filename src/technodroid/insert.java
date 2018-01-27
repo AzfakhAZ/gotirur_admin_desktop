@@ -68,12 +68,12 @@ public class insert extends javax.swing.JFrame {
                 v.add(r.getString(2));
                 v.add(r.getString(4));
                 v.add(r.getString(5));
-                v.add(r.getString(6));
+                v.add(r.getString(8));
                 v.add(r.getString(7));
                 v.add(r.getString(10));
-                v.add(r.getString(9));
-                v.add(r.getString(12));
-                v.add(r.getString(8));
+                v.add(r.getString(6));
+                v.add(r.getString(11));
+               
                 t.addRow(v);
 
             }
@@ -83,7 +83,7 @@ public class insert extends javax.swing.JFrame {
         }
     }
 
-    public insert(String id, String jDateChooser1, String productname1, String companyname1, String details1, String description1, String image1, String stock1, String g, String price1) {
+    public insert(String id, String jDateChooser1, String productname1, String description1, String image1, String stock1, String g, String price1 ,String category1) {
         initComponents();
         try {
             com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
@@ -102,8 +102,7 @@ public class insert extends javax.swing.JFrame {
 //jDateChooser1.
 pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + ".jpg"));
         productname.setText(productname1);
-        companyname.setText(companyname1);
-        details.setText(details1);
+        
         description.setText(description1);
         if (g.contains("gstcategory")) {
             gstcategory.setSelectedItem(true);
@@ -118,6 +117,12 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
         jButton4.setText("update");
     }
 
+   
+
+//    insert(String toString, String toString0, String toString1, String toString2, String toString3, String toString4, String toString5, String toString6) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -130,9 +135,7 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
         filechooser = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         pic = new javax.swing.JLabel();
-        details = new javax.swing.JTextField();
         stock = new javax.swing.JTextField();
-        companyname = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         productname = new javax.swing.JTextField();
         gstcategory = new javax.swing.JComboBox<>();
@@ -162,25 +165,21 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Add New Product");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1001, 52));
 
         pic.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        getContentPane().add(pic, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 150, 330, 260));
-
-        details.setText("Enter your product details...");
-        getContentPane().add(details, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 60, 270, 30));
+        getContentPane().add(pic, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 340, 350));
         getContentPane().add(stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 120, 30));
 
-        companyname.setText("Enter your company...");
-        getContentPane().add(companyname, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 280, 30));
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("Product Name");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 30));
+        jLabel3.setText("Product");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
 
+        productname.setText("enter your prodect details....");
         productname.setToolTipText("enter");
-        getContentPane().add(productname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 270, 30));
+        getContentPane().add(productname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 440, 30));
 
         gstcategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Category" }));
         gstcategory.addItemListener(new java.awt.event.ItemListener() {
@@ -201,11 +200,11 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
 
         gstvalue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         gstvalue.setText("GST  Value");
-        getContentPane().add(gstvalue, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 210, 30));
+        getContentPane().add(gstvalue, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 140, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Price");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 100, 30));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 110, 30));
         getContentPane().add(price, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 120, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -251,7 +250,7 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
 
             },
             new String [] {
-                "SI No", "date", "Product Name", "Company Name", "Details", "description", "Image", "Stock", "Tax", "Price"
+                "SI No", "date", "Product Name", "description", "Image", "Stock", "Tax", "Price", "Category"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
@@ -268,7 +267,7 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Stock");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 100, 30));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 110, 30));
         getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 180, 30));
 
         jMenu1.setText("File");
@@ -291,7 +290,7 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
             try {
                 com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
                 java.sql.Statement S = C.createStatement();
-                S.executeUpdate("UPDATE `insert` SET `id`='" + sdf.format(jDateChooser1.getDate()) + "','" + productname.getText() + "','" + companyname.getText() + "','" + details.getText() + "','" + description.getText() + "'," + price.getText() + "," + stock.getText() + ",'" + productname.getText() + ".jpg','" + gstcategory.getSelectedItem() + "','" + gstvalue.getText() + "','" + gstcategory.getSelectedItem() + "'");
+                S.executeUpdate("UPDATE `insert` SET `id`='" + sdf.format(jDateChooser1.getDate()) + "','" + productname.getText() + "','" + description.getText() + "'," + price.getText() + "," + stock.getText() + ",'" + productname.getText() + ".jpg','" + gstcategory.getSelectedItem() + "','" + gstvalue.getText() + "','" + gstcategory.getSelectedItem() + "'");
                 JOptionPane.showMessageDialog(rootPane, " update sucssessfully");
             } catch (SQLException ex) {
                 Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
@@ -326,8 +325,8 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
                 com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
                 java.sql.Statement S = C.createStatement();
 
-                S.executeUpdate("INSERT INTO `insert`( `date`, `productname`, `companyname`, `details`, `description`, `price`, `stock`, `image`,`gstcategory`,`gstvalue`,`category`)"
-                        + "VALUES ('" + sdf.format(jDateChooser1.getDate()) + "','" + productname.getText() + "','" + companyname.getText() + "','" + details.getText() + "','" + description.getText() + "'," + price.getText() + "," + stock.getText() + ",'" + productname.getText() + ".jpg','" + gstcategory.getSelectedItem() + "','" + gstvalue.getText() + "','" + gstcategory.getSelectedItem() + "')");
+                S.executeUpdate("INSERT INTO `insert`( `date`, `productname`, `description`, `price`, `stock`, `image`,`gstcategory`,`gstvalue`,`category`)"
+                        + "VALUES ('" + sdf.format(jDateChooser1.getDate()) + "','" + productname.getText() + "','" + description.getText() + "'," + price.getText() + "," + stock.getText() + ",'" + productname.getText() + ".jpg','" + gstcategory.getSelectedItem() + "','" + gstvalue.getText() + "','" + gstcategory.getSelectedItem() + "')");
                 JOptionPane.showMessageDialog(rootPane, " insert sucssessfully");
             } catch (SQLException ex) {
                 Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
@@ -448,9 +447,7 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField companyname;
     private javax.swing.JTextArea description;
-    private javax.swing.JTextField details;
     private javax.swing.JFileChooser filechooser;
     private javax.swing.JComboBox<String> gstcategory;
     private javax.swing.JLabel gstvalue;

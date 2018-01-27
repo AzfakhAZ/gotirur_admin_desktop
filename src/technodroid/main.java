@@ -33,19 +33,18 @@ public class main extends javax.swing.JFrame {
                 DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
                 while (r.next()) {
                     Vector v = new Vector();
-                    v.add(r.getString(1));
-                    
-                    v.add(r.getString(2));
-                    v.add(r.getString(4));
-                    v.add(r.getString(5));
-                    v.add(r.getString(6));
-                    v.add(r.getString(7));
-                    v.add(r.getString(10));
-                    v.add(r.getString(9));
-                    v.add(r.getString(12));
-                     v.add(r.getString(8));
-                     v.add(r.getString(13));
-                    t.addRow(v);
+                v.add(r.getString(1));
+
+                v.add(r.getString(2));
+                v.add(r.getString(4));
+                v.add(r.getString(5));
+                v.add(r.getString(8));
+                v.add(r.getString(7));
+                v.add(r.getString(10));
+                v.add(r.getString(6));
+                v.add(r.getString(11));
+               
+                t.addRow(v);
 
                 }
 
@@ -139,7 +138,7 @@ public class main extends javax.swing.JFrame {
 
             },
             new String [] {
-                "SI No", "Date", "Product Name", "Company", "Details", "Description", "image", "Stock", "Tax", "Price", "Category"
+                "SI No", "Date", "Product Name", "Description", "image", "Stock", "Tax", "Price", "Category"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
@@ -333,13 +332,14 @@ if (jTable1.getSelectedRowCount() == 0) {
                   jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString(),
                     jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(),
                     jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString(),
-                    jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString(),
-                    jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString(),
-             jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString(),
+                   
+             jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString(),
+           jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString(),
+           jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString(),
            jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString(),
            jTable1.getValueAt(jTable1.getSelectedRow(), 7).toString(),
-           jTable1.getValueAt(jTable1.getSelectedRow(), 8).toString(),
-           jTable1.getValueAt(jTable1.getSelectedRow(), 9).toString());
+                   jTable1.getValueAt(jTable1.getSelectedRow(), 8).toString()
+           );
           
                     
                   
@@ -382,8 +382,8 @@ if (jTable1.getSelectedRowCount() == 0) {
                     
                     v.add(r.getString(2));
                     v.add(r.getString(4));
-                    v.add(r.getString(5));
-                    v.add(r.getString(6));
+//                    v.add(r.getString(5));
+//                    v.add(r.getString(6));
                     v.add(r.getString(7));
                     v.add(r.getString(10));
                     v.add(r.getString(9));
