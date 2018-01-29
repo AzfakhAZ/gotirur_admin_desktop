@@ -75,6 +75,7 @@ public class main extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         category = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -116,6 +117,7 @@ public class main extends javax.swing.JFrame {
         getContentPane().add(searchbox, new org.netbeans.lib.awtextra.AbsoluteConstraints(689, 10, 270, 30));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Show Items");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 120, 30));
 
@@ -170,6 +172,9 @@ public class main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, 30));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Use\\Documents\\icons\\wall.jpg")); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 680));
 
         jMenu1.setText("File");
 
@@ -509,6 +514,7 @@ company.addItem("etc..");*/
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

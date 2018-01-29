@@ -155,6 +155,7 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
         jButton4 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -165,6 +166,7 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Add New Product");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1001, 52));
@@ -174,6 +176,7 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
         getContentPane().add(stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 120, 30));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Product");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
 
@@ -195,23 +198,27 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
         getContentPane().add(gstcategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 210, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Description");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 190, 30));
 
         gstvalue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        gstvalue.setForeground(new java.awt.Color(255, 255, 255));
         gstvalue.setText("GST  Value");
         getContentPane().add(gstvalue, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 140, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Price");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 110, 30));
         getContentPane().add(price, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 120, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Date");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 100, 30));
 
-        jButton1.setText("Clear");
+        jButton1.setText("Refresh");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -220,6 +227,7 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 130, 30));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Upload Product Image");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 190, 30));
 
@@ -266,9 +274,13 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 360, 130, 30));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Stock");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 110, 30));
         getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 180, 30));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Use\\Documents\\icons\\wall.jpg")); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 680));
 
         jMenu1.setText("File");
 
@@ -325,8 +337,7 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
                 com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
                 java.sql.Statement S = C.createStatement();
 
-                S.executeUpdate("INSERT INTO `insert`( `date`, `productname`, `description`, `price`, `stock`, `image`,`gstcategory`,`gstvalue`,`category`)"
-                        + "VALUES ('" + sdf.format(jDateChooser1.getDate()) + "','" + productname.getText() + "','" + description.getText() + "'," + price.getText() + "," + stock.getText() + ",'" + productname.getText() + ".jpg','" + gstcategory.getSelectedItem() + "','" + gstvalue.getText() + "','" + gstcategory.getSelectedItem() + "')");
+                S.executeUpdate("INSERT INTO `insert`( `date`, `productname`, `description`, `price`, `stock`, `image`,`gstcategory`,`gstvalue`,`category`) VALUES ('" + sdf.format(jDateChooser1.getDate()) + "','" + productname.getText() + "','" + description.getText() + "'," + price.getText() + "," + stock.getText() + ",'" + productname.getText() + ".jpg','" + gstcategory.getSelectedItem() + "','" + gstvalue.getText() + "','" + gstcategory.getSelectedItem() + "')");
                 JOptionPane.showMessageDialog(rootPane, " insert sucssessfully");
             } catch (SQLException ex) {
                 Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
@@ -457,6 +468,7 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
     private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;

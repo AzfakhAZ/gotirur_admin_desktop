@@ -5,6 +5,14 @@
  */
 package technodroid;
 
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Use
@@ -16,6 +24,29 @@ public class oldbill extends javax.swing.JFrame {
      */
     public oldbill() {
         initComponents();
+        try {
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
+            ResultSet r = S.executeQuery("select * from `bill`");
+            DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+            while (r.next()) {
+                Vector v = new Vector();
+                v.add(r.getString(11));
+
+                v.add(r.getString(12));
+                v.add(r.getString(2));
+                v.add(r.getString(3));
+                v.add(r.getString(4));
+                v.add(r.getString(5));
+                v.add(r.getString(6));
+
+                t.addRow(v);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -30,11 +61,12 @@ public class oldbill extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        searchbox = new javax.swing.JTextField();
+        show = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -50,7 +82,7 @@ public class oldbill extends javax.swing.JFrame {
 
             },
             new String [] {
-                "billno", "date", "custemername", "contact", "gstno", "product", "company", "details", "total", "Bill Type"
+                "Bill Type", "Billno", "Date", "custemername", "contact", "gstno", "service"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -64,10 +96,21 @@ public class oldbill extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 600, 90, 30));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 310, 40));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "date", "billno", " " }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 210, 40));
+        searchbox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchboxKeyPressed(evt);
+            }
+        });
+        getContentPane().add(searchbox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 310, 40));
+
+        show.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Show Item", "Date", "Billno", "Bill Type", " " }));
+        show.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                showItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 210, 40));
 
         jButton2.setText("View");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -82,10 +125,13 @@ public class oldbill extends javax.swing.JFrame {
                 jTextField2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(869, 530, 100, 30));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 540, 100, 30));
 
         jLabel1.setText("Total");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 530, 60, 30));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 540, 60, 30));
+
+        jButton3.setText("Update");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 530, -1, 30));
 
         jMenu1.setText("File");
 
@@ -106,9 +152,9 @@ public class oldbill extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-main m=new main();
-m.setVisible(true);
-this.dispose();// TODO add your handling code here:
+        main m = new main();
+        m.setVisible(true);
+        this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -118,6 +164,87 @@ this.dispose();// TODO add your handling code here:
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void showItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_showItemStateChanged
+
+//        if (show.getSelectedItem().toString().equals("billtype")) {
+//            try {
+//                com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+//                java.sql.Statement S = C.createStatement();
+//                ResultSet r = S.executeQuery("select * from bill where billtype='" + show.getSelectedItem().toString() + "'");
+//
+//                DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+//                while (jTable1.getRowCount() != 0) {
+//                    t.removeRow(0);
+//                }
+//                while (r.next()) {
+//                    Vector v = new Vector();
+//                    v.add(r.getString(11));
+//
+//                    v.add(r.getString(12));
+//                    v.add(r.getString(2));
+//                    v.add(r.getString(3));
+//                    v.add(r.getString(4));
+//                    v.add(r.getString(5));
+//                    v.add(r.getString(6));
+//
+//                    t.addRow(v);
+//
+//                }
+//
+//                // TODO add your handling code here:
+//            } catch (SQLException ex) {
+//                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_showItemStateChanged
+
+    private void searchboxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchboxKeyPressed
+                   if (evt.getKeyCode() == 10) {
+            String sql = null;
+            if (show.getSelectedItem().equals("Billno")) {
+                sql = "select * from `bill` where billno like '" + searchbox.getText() + "%'";
+
+            }
+            if (show.getSelectedItem().equals("Bill Type")) {
+                sql = "select * from `bill` where billtype like '" + searchbox.getText() + "%'";
+
+            }
+            if (show.getSelectedItem().equals("Date")) {
+                sql = "select * from `insert` where date like '" + searchbox.getText() + "%'";
+
+            }
+            
+            try {
+                com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+                java.sql.Statement S = C.createStatement();
+                ResultSet r = S.executeQuery(sql);
+                DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+                while (jTable1.getRowCount() != 0) {
+                    t.removeRow(0);
+                }
+                while (r.next()) {
+                   Vector v = new Vector();
+                v.add(r.getString(11));
+
+                v.add(r.getString(12));
+                v.add(r.getString(2));
+                v.add(r.getString(3));
+                v.add(r.getString(4));
+                v.add(r.getString(5));
+                v.add(r.getString(6));
+
+                t.addRow(v);
+
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchboxKeyPressed
 
     /**
      * @param args the command line arguments
@@ -157,7 +284,7 @@ this.dispose();// TODO add your handling code here:
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -166,7 +293,8 @@ this.dispose();// TODO add your handling code here:
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField searchbox;
+    private javax.swing.JComboBox<String> show;
     // End of variables declaration//GEN-END:variables
 }

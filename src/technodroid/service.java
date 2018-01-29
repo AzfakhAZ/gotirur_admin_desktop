@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class service extends javax.swing.JFrame {
 
-    Vector service1, servicetype1, amount1, person11, person21,selectperson1;
+    Vector service1, product1, quantity1, tax1, price1;
     int ser1;
 
     /**
@@ -41,15 +41,26 @@ public class service extends javax.swing.JFrame {
         }
     }
 
-    public service(Vector service, Vector servicetype, Vector amount, Vector person1, Vector person2, Vector selectperson, int ser) {
+    public service(Vector service, Vector product, Vector quantity, Vector tax, Vector price, int ser) {
         initComponents();
         service1 = service;
-        servicetype1 = servicetype;
-        amount1 = amount;
-        person11 = person1;
-        person21 = person2;
-        selectperson1 = selectperson;
+        product1 = product;
+        quantity1 = quantity;
+        tax1 = tax;
+        price1 = price;
         ser1 = ser;
+        try {
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
+            ResultSet r = S.executeQuery("select * from staff");
+            while (r.next()) {
+                selectperson.addItem(r.getString("name"));
+            }
+
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -75,36 +86,43 @@ public class service extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Service Bill");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 70));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Person 2");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 190, 40));
         getContentPane().add(person2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 260, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Service");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 190, 40));
         getContentPane().add(servicetype, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 260, 40));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Service Charge");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 190, 40));
         getContentPane().add(amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 260, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Person Name");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 190, 40));
         getContentPane().add(person1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 260, 40));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Person 1");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 190, 40));
 
@@ -135,6 +153,9 @@ public class service extends javax.swing.JFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, 70, 30));
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/technodroid/wall.jpg"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 600));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -151,22 +172,12 @@ public class service extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        bill b = new bill(servicetype.getText(), amount.getText(), person1.getText(), person2.getText(), selectperson.getSelectedItem(), service1, servicetype1, amount1, person11, person21, selectperson1, ser1);
+        bill b = new bill(servicetype.getText(), amount.getText(), selectperson.getSelectedItem().toString(), person1.getText(), person2.getText(),
+                service1, product1, quantity1, tax1, price1, ser1);
         b.setVisible(true);
         this.dispose();
 
-        try {
-            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
-            java.sql.Statement S = C.createStatement();
-
-            S.executeUpdate("INSERT INTO `service`( `service`, `servicecharge`, `person1`, `person2`, `person`) VALUES ('" + servicetype.getText() + "','" + amount.getText() + "','" + person1.getText() + "','" + person2.getText() + "','" + selectperson.getSelectedItem() + "')");
-
-            JOptionPane.showMessageDialog(rootPane, " insert sucssessfully");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
+        
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -214,6 +225,7 @@ public class service extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

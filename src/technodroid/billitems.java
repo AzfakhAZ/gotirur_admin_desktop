@@ -22,22 +22,24 @@ import javax.swing.table.DefaultTableModel;
 public class billitems extends javax.swing.JFrame {
 
     private int ini_flag = 0;
-    Vector service1,product1,quantity1,tax1,price1;
+    Vector service1, product1, quantity1, tax1, price1;
     int ser1;
+
     /**
      * Creates new form billitems
      */
     public billitems() {
         initComponents();
     }
-    public billitems(Vector service,Vector product,Vector quantity,Vector tax,Vector price,int ser) {
+
+    public billitems(Vector service, Vector product, Vector quantity, Vector tax, Vector price, int ser) {
         initComponents();
-        service1=service;
-        product1=product;
-        quantity1=quantity;
-        tax1=tax;
-        price1=price;
-        ser1=ser;
+        service1 = service;
+        product1 = product;
+        quantity1 = quantity;
+        tax1 = tax;
+        price1 = price;
+        ser1 = ser;
     }
 
     /**
@@ -61,21 +63,26 @@ public class billitems extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         showitem = new javax.swing.JComboBox<>();
+        qty = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(500, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Add Bill Itemes");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Tax/Gst");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 120, 50));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Product Name");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 140, 50));
         getContentPane().add(price, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 290, 50));
@@ -99,12 +106,31 @@ public class billitems extends javax.swing.JFrame {
         getContentPane().add(productname, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 290, 50));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Price");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 120, 50));
         getContentPane().add(tax, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 290, 50));
-        getContentPane().add(quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 290, 50));
+
+        quantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quantityActionPerformed(evt);
+            }
+        });
+        quantity.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                quantityKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                quantityKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                quantityKeyTyped(evt);
+            }
+        });
+        getContentPane().add(quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 190, 50));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Quantity");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 120, 50));
 
@@ -145,16 +171,23 @@ public class billitems extends javax.swing.JFrame {
         });
         getContentPane().add(showitem, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 290, 0));
 
+        qty.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        qty.setText("stock");
+        getContentPane().add(qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, 80, 50));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/technodroid/wall.jpg"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 500, 610));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        bill b = new bill(productname.getText(),tax.getText(),price.getText(),quantity.getText(),service1,product1,quantity1,tax1,price1,ser1);
+        bill b = new bill(productname.getText(), tax.getText(), price.getText(), quantity.getText(), service1, product1, quantity1, tax1, price1, ser1);
         b.setVisible(true);
         this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -263,7 +296,7 @@ public class billitems extends javax.swing.JFrame {
                 while (r.next()) {
                     tax.setText(r.getString("gstvalue"));
                     price.setText(r.getString("price"));
-
+                    qty.setText(r.getString("stock"));
                 }
                 quantity.requestFocus();
                 ini_flag = 1;
@@ -277,6 +310,28 @@ public class billitems extends javax.swing.JFrame {
     private void jButton3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton3KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3KeyPressed
+
+    private void quantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quantityActionPerformed
+
+    private void quantityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quantityKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quantityKeyTyped
+
+    private void quantityKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quantityKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quantityKeyPressed
+
+    private void quantityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quantityKeyReleased
+        if (!quantity.getText().isEmpty()) {
+            if (Integer.parseInt(quantity.getText()) > Integer.parseInt(qty.getText())) {
+                quantity.setText(qty.getText());
+                JOptionPane.showMessageDialog(rootPane, " Out Of Stock ");
+                
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_quantityKeyReleased
 
     /**
      * @param args the command line arguments
@@ -319,10 +374,12 @@ public class billitems extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField price;
     private javax.swing.JTextField productname;
+    private javax.swing.JLabel qty;
     private javax.swing.JTextField quantity;
     private javax.swing.JComboBox<String> showitem;
     private javax.swing.JTextField tax;

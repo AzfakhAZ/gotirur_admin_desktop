@@ -38,18 +38,26 @@ public class login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
-        clear = new javax.swing.JButton();
         login = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setPreferredSize(new java.awt.Dimension(444, 330));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("username");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 110, 30));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("parssword");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
-        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 100, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 162, 90, 30));
+        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 170, 30));
 
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,23 +69,26 @@ public class login extends javax.swing.JFrame {
                 passwordKeyPressed(evt);
             }
         });
-        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 100, -1));
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 170, 30));
 
-        clear.setText("clear");
-        clear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearActionPerformed(evt);
-            }
-        });
-        getContentPane().add(clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, -1, -1));
-
-        login.setText("login");
+        login.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        login.setText("LOGIN");
+        login.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginActionPerformed(evt);
             }
         });
-        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, -1, -1));
+        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 130, 50));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/technodroid/Login-Manager.png"))); // NOI18N
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 110, 140));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Use\\Documents\\icons\\download.jpg")); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 90));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Use\\Documents\\icons\\wallnew.png")); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 500, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -111,12 +122,6 @@ public class login extends javax.swing.JFrame {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
    }   // TODO add your handling code here:
     }//GEN-LAST:event_loginActionPerformed
-
-    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
-       main m=new main();
-            m.setVisible(true);
-            this.dispose(); // TODO add your handling code here:
-    }//GEN-LAST:event_clearActionPerformed
 
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
      
@@ -193,9 +198,11 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton clear;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JButton login;
     private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;

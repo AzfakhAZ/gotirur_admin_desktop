@@ -25,44 +25,13 @@ public class bill extends javax.swing.JFrame {
      */
     public bill() {
         initComponents();
-        try {
-            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
-            java.sql.Statement S = C.createStatement();
-            ResultSet r = S.executeQuery("select max(billno) as billno from bill");
-
-            while (r.next()) {
-                System.out.println(r.getString("billno"));
-                if (r.getString("billno") == null) {
-                    billno.setText("1");
-                } else {
-                    billno.setText(String.valueOf(Integer.parseInt(r.getString("max(billno)")) + 1));
-                }
-            }
-
-            // TODO add your handling code here:
-        } catch (SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        generate_bill_no();
     }
 
-    bill(String text, String text0, String text1, String text2, Vector service, Vector product, Vector quantity, Vector tax, Vector price, int ser) {
+    bill(String pro, String ta, String pri, String qty,
+            Vector service, Vector product, Vector quantity, Vector tax, Vector price, int ser) {
         initComponents();
-        try {
-            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
-            java.sql.Statement S = C.createStatement();
-            ResultSet r = S.executeQuery("select max(billno)  as billno from bill");
-            while (r.next()) {
-                if (r.getString("billno") == null) {
-                    billno.setText("1");
-                } else {
-                    billno.setText(String.valueOf(Integer.parseInt(r.getString("max(billno)")) + 1));
-                }
-            }
-
-            // TODO add your handling code here:
-        } catch (SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        generate_bill_no();
 //        try {
 //            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
 //            java.sql.Statement S = C.createStatement();
@@ -99,14 +68,17 @@ public class bill extends javax.swing.JFrame {
         v.add(i + 1);
 
         v.add("");
-        v.add(text);
-        v.add(text2);
-        v.add(text0);
-        v.add(text1);
-        v.add(Integer.parseInt(text2) * Double.parseDouble(text1));
+        v.add(pro);
+        v.add(qty);
+        v.add(ta);
+        v.add(pri);
+        totel = totel + Integer.parseInt(qty) * Double.parseDouble(pri);
+        ta = ta.replace("%", "");
+        totel = totel + (totel * (Double.parseDouble(ta) / 100));
+
+        v.add(totel);
 
         t.addRow(v);
-        totel = totel + Integer.parseInt(text2) * Double.parseDouble(text1);
         gtotel.setText(String.valueOf(totel));
 //        try {
 //                com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
@@ -140,41 +112,48 @@ public class bill extends javax.swing.JFrame {
         //To change body of generated methods, choose Tools | Templates.
     }
 
-    bill(String text, String text0, String text1, String text2, Object selectedItem, Vector service1, Vector servicetype1, Vector amount1, Vector person11, Vector person21, Vector selectperson1, int ser1) {
+    //service
+    bill(String sertype, String am, String seleper, String per1, String per2,
+            Vector service, Vector product, Vector quantity, Vector tax, Vector price, int ser) {
         initComponents();
-           DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        generate_bill_no();
+        DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
         int i;
         double totel = 0;
-        for (i = 0; i < service1.size(); i++) {
+        for (i = 0; i < service.size(); i++) {
             Vector v = new Vector();
             v.add(i + 1);
 
-            v.add(service1.get(i));
+            v.add(service.get(i));
 
-            v.add(servicetype1.get(i));
-            v.add(amount1.get(i));
-            v.add(person11.get(i));
-            v.add(person21.get(i));
-             v.add(selectperson1.get(i));
-           
+            v.add(product.get(i));
+            v.add(quantity.get(i));
+            v.add(tax.get(i));
+            v.add(price.get(i));
+            v.add(Integer.parseInt(quantity.get(i).toString()) * Double.parseDouble(price.get(i).toString()));
+            totel = totel + Integer.parseInt(quantity.get(i).toString()) * Double.parseDouble(price.get(i).toString());
+
             t.addRow(v);
 
         }
+
         Vector v = new Vector();
         v.add(i + 1);
 
+        v.add(sertype);
         v.add("");
-        v.add(text);
-        v.add(text2);
-        v.add(text0);
-        v.add(text1);
-        
+        v.add("");
+        v.add("");
+        v.add(am);
+
+        v.add(am);
 
         t.addRow(v);
+        totel = totel + Integer.parseInt(am);
+        gtotel.setText(String.valueOf(totel));
+
 //To change body of generated methods, choose Tools | Templates.
     }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -213,12 +192,15 @@ public class bill extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         billtype = new javax.swing.JComboBox<>();
+        jButton6 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("COMPANY NAME");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 340, 20));
 
@@ -248,7 +230,7 @@ public class bill extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("GST                            :");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 150, 30));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 150, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Costemer Name      :");
@@ -256,17 +238,19 @@ public class bill extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Contact Nomber         :");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 160, 30));
-        jPanel2.add(cn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 280, 30));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 160, 30));
+        jPanel2.add(cn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 280, 30));
         jPanel2.add(cname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 280, 30));
-        jPanel2.add(gst, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 280, 30));
+        jPanel2.add(gst, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 280, 30));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 480, 150));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 480, 160));
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Places ANd details");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 240, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Date");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 100, 40));
 
@@ -275,12 +259,12 @@ public class bill extends javax.swing.JFrame {
 
             },
             new String [] {
-                "SI No", "Service Charge", "Product", "Quantity", "Tax", "Price", "Total"
+                "SI No", "Service", "Product", "Quantity", "Tax", "Price", "Total"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 940, 250));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 960, 250));
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -307,11 +291,13 @@ public class bill extends javax.swing.JFrame {
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 220, 30));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Bill No");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 90, 40));
         getContentPane().add(billno, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 130, 40));
         getContentPane().add(gtotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 500, 110, 30));
 
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Total");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 500, 110, 30));
         getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 170, 40));
@@ -324,7 +310,7 @@ public class bill extends javax.swing.JFrame {
         });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 213, 220, 30));
 
-        jButton5.setText("Clear");
+        jButton5.setText("Refresh");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -332,15 +318,42 @@ public class bill extends javax.swing.JFrame {
         });
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 600, 100, 30));
 
-        billtype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Cash Bill", "Credit Bill" }));
+        billtype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Bill Type", "Cash Bill", "Credit Bill" }));
         getContentPane().add(billtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 550, 150, 30));
+
+        jButton6.setText("Remove");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 600, 100, 30));
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/technodroid/wall.jpg"))); // NOI18N
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 1000, 710));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        service s = new service();
+        Vector serVector = new Vector();
+        Vector product = new Vector();
+        Vector quantity = new Vector();
+        Vector tax = new Vector();
+        Vector price = new Vector();
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            serVector.add(jTable1.getValueAt(i, 1).toString());
+            product.add(jTable1.getValueAt(i, 2).toString());
+            quantity.add(jTable1.getValueAt(i, 3).toString());
+            tax.add(jTable1.getValueAt(i, 4).toString());
+            price.add(jTable1.getValueAt(i, 5).toString());
+
+        }
+        int ser = jTable1.getRowCount();
+
+        service s = new service(serVector, product, quantity, tax, price, ser);
         s.setVisible(true);// TODO add your handling code here:
+        //this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -366,6 +379,7 @@ public class bill extends javax.swing.JFrame {
         int ser = jTable1.getRowCount();
         billitems b = new billitems(serVector, product, quantity, tax, price, ser);
         b.setVisible(true);        // TODO add your handling code here:
+//        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -377,23 +391,51 @@ public class bill extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         for (int i = 0; i < jTable1.getRowCount(); i++) {
 
+//            if (!jTable1.getValueAt(i, 1).toString().equals("")) {
+//                try {
+//                    com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+//                    java.sql.Statement S = C.createStatement();
+//
+//                    S.executeUpdate("INSERT INTO `service`(`person1`, `person2`, `person`, `billno`) VALUES ('" + jTable1.getValueAt(i,) + "',[value-2],[value-3],[value-4],[value-5])");
+//                    JOptionPane.showMessageDialog(rootPane, " Service Added");
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
+//
+//                }
+//            }
             try {
                 com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
                 java.sql.Statement S = C.createStatement();
 
-                S.executeUpdate("INSERT INTO `bill`( `billno`, `date`, `custemername`, `contactno`, `gstno`, `servicecharge`, `productname`, `quantity`,"
-                        + " `tax`, `price`, `billtype`) VALUES ('" + billno.getText() + "','" + jDateChooser1.getDateFormatString() + "','" + cname.getText() + "','" + cn.getText() + "','" + gst.getText() + "','" + jTable1.getValueAt(i, 1).toString() + "'"
-                        + ",'" + jTable1.getValueAt(i, 2).toString() + "','" + jTable1.getValueAt(i, 3).toString() + "','" + jTable1.getValueAt(i, 4).toString() + "','" + jTable1.getValueAt(i, 5).toString() + "','" + billtype.getSelectedItem().toString() + "')");
+                S.executeUpdate("INSERT INTO `bill`( `billno`, `date`, `custemername`, `contactno`, `gstno`, `service`, `productname`, `quantity`, `tax`, `price`, `billtype`) VALUES ('" + billno.getText() + "','" + jDateChooser1.getDate().toString() + "','" + cname.getText() + "','" + cn.getText() + "','" + gst.getText() + "','" + jTable1.getValueAt(i, 1).toString() + "','" + jTable1.getValueAt(i, 2).toString() + "','" + (jTable1.getValueAt(i, 3).toString().equals("") ? "0" : jTable1.getValueAt(i, 3).toString()) + "','" + jTable1.getValueAt(i, 4).toString() + "','" + jTable1.getValueAt(i, 5).toString() + "','" + billtype.getSelectedItem().toString() + "')");
+                if (!jTable1.getValueAt(i, 2).toString().equals("")) {
+                    try {
 
+                        int stock = 0;
+                        ResultSet r = S.executeQuery("SELECT `stock` FROM `insert` WHERE `productname`='"+jTable1.getValueAt(i, 2).toString()+"'");
+                        while (r.next()) {
+                            stock = r.getInt("stock");
+                        }
+                        S.executeUpdate("UPDATE `insert` SET `stock`='"+(stock-Integer.parseInt(jTable1.getValueAt(i, 3).toString()))+"' WHERE `productname`='"+jTable1.getValueAt(i, 2).toString()+"'");
+                        
+                        
+                    } catch (SQLException ex) {
+                        Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
 
             }
 
         }
-        JOptionPane.showMessageDialog(rootPane, " insert sucssessfully");
+        JOptionPane.showMessageDialog(rootPane, " Print sucssessfully");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -442,11 +484,13 @@ public class bill extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -460,4 +504,26 @@ public class bill extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void generate_bill_no() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
+            ResultSet r = S.executeQuery("select max(billno) as billno from bill");
+
+            while (r.next()) {
+                System.out.println(r.getString("billno"));
+                if (r.getString("billno") == null) {
+                    billno.setText("1");
+                } else {
+                    billno.setText(String.valueOf(Integer.parseInt(r.getString("billno")) + 1));
+                }
+            }
+
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
