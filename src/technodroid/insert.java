@@ -33,7 +33,7 @@ import org.imgscalr.Scalr;
  * @author Admin
  */
 public class insert extends javax.swing.JFrame {
-
+ 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     File SourceFile, myfile = null;
     String id2;
@@ -134,7 +134,6 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
 
         filechooser = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
-        pic = new javax.swing.JLabel();
         stock = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         productname = new javax.swing.JTextField();
@@ -155,14 +154,20 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
         jButton4 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
+        pic = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Technodroid");
         setPreferredSize(new java.awt.Dimension(1000, 700));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -170,9 +175,6 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Add New Product");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1001, 52));
-
-        pic.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        getContentPane().add(pic, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 340, 350));
         getContentPane().add(stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 120, 30));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -182,6 +184,11 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
 
         productname.setText("enter your prodect details....");
         productname.setToolTipText("enter");
+        productname.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                productnameFocusGained(evt);
+            }
+        });
         getContentPane().add(productname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 440, 30));
 
         gstcategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Category" }));
@@ -279,6 +286,13 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 110, 30));
         getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 180, 30));
 
+        jInternalFrame1.setVisible(true);
+
+        pic.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jInternalFrame1.getContentPane().add(pic, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, 350, 300));
+
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Use\\Documents\\icons\\wall.jpg")); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 680));
 
@@ -289,12 +303,30 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Tools");
+
+        jMenuItem2.setText("Calculator");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuItem3.setText("Notepad");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -422,6 +454,28 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
         // TODO add your handling code here:
     }//GEN-LAST:event_gstcategoryActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+ProcessBuilder b = new ProcessBuilder("calc.exe");
+        try {
+            Process p = b.start();// TODO add your handling code here:
+        } catch (IOException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }         // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+ProcessBuilder b = new ProcessBuilder("notepad.exe");
+        try {
+            Process p = b.start();// TODO add your handling code here:
+        } catch (IOException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void productnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_productnameFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productnameFocusGained
+
     /**
      * @param args the command line arguments
      */
@@ -467,6 +521,7 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -479,6 +534,8 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

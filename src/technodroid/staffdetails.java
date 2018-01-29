@@ -5,12 +5,14 @@
  */
 package technodroid;
 
+import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -56,7 +58,7 @@ public class staffdetails extends javax.swing.JFrame {
                 v.add(r.getString(6));
                 v.add(r.getString(7));
                 v.add(r.getString(4));
-
+ v.add(r.getString(5));
                 t.addRow(v);
             }
             
@@ -121,9 +123,18 @@ public class staffdetails extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         show = new javax.swing.JComboBox<>();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Technodroid");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -137,7 +148,7 @@ public class staffdetails extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Si No", "Name", "Address", "Contact Info", "E-mail", "Image"
+                "Si No", "Name", "Address", "Contact Info", "E-mail", "Image", "Resume"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -148,6 +159,11 @@ public class staffdetails extends javax.swing.JFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 590, 90, 40));
 
         jButton2.setText("Upate");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 220, 90, 30));
 
         jButton3.setText("Upate");
@@ -187,10 +203,52 @@ public class staffdetails extends javax.swing.JFrame {
         });
         getContentPane().add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 240, 40));
 
+        jButton4.setText("Back");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, 100, 40));
+
+        jButton5.setText("Delete");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(793, 220, 80, 30));
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/technodroid/wall.jpg"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 700));
 
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Tools");
+
+        jMenuItem1.setText("Calculator");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setText("Notepad");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void showItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_showItemStateChanged
@@ -211,6 +269,7 @@ public class staffdetails extends javax.swing.JFrame {
                 v.add(r.getString(2));
                 v.add(r.getString(6));
                 v.add(r.getString(3));
+               
                 
 
                 t.addRow(v);
@@ -224,6 +283,70 @@ public class staffdetails extends javax.swing.JFrame {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_showItemStateChanged
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+ ProcessBuilder b = new ProcessBuilder("calc.exe");
+        try {
+            Process p = b.start();// TODO add your handling code here:
+        } catch (IOException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+ProcessBuilder b = new ProcessBuilder("notepad.exe");
+        try {
+            Process p = b.start();// TODO add your handling code here:
+        } catch (IOException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }         // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+main m=new main();
+m.setVisible(true);
+this.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       if (jTable1.getSelectedRowCount() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "please select item");
+        } else {
+
+            staff s = new staff(
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString(),
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString(),
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString(),
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString(),
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString(),
+                    jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString(),
+            jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString());
+                    
+            
+
+            s.setVisible(true);
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+ 
+        if (jTable1.getSelectedRowCount() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "please select item");
+        } else {
+
+        
+        try {
+            com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+            java.sql.Statement S = C.createStatement();
+
+            S.executeUpdate("DELETE FROM `staff` WHERE id=" + jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+            JOptionPane.showMessageDialog(rootPane, " delete sucssessfully");
+        } catch (SQLException ex) {
+            Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
+
+        } 
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,10 +387,17 @@ public class staffdetails extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;

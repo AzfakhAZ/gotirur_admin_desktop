@@ -30,11 +30,34 @@ import org.imgscalr.Scalr;
  */
 public class staff extends javax.swing.JFrame {
 File SourceFile, myfile = null;
+String id2;
     /**
      * Creates new form staff
      */
     public staff() {
         initComponents();
+    }
+
+    staff(String id, String name1, String address1, String contact1, String email1, String image1, String resume1) {
+        initComponents();
+        id2 = id;
+//jDateChooser1.
+
+        name.setText(name1);
+        
+        address.setText(address1);
+        
+        contactno.setText(contact1);
+
+        
+        email.setText(email1);
+image.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + name1 + ".jpg"));
+resume.setText(resume1);
+        jButton3.setText("update");
+    
+
+        
+       //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -66,8 +89,9 @@ File SourceFile, myfile = null;
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 700));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Technodroid");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -101,7 +125,7 @@ File SourceFile, myfile = null;
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 110, 30));
         getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 160, 40));
-        getContentPane().add(resume, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 240, 40));
+        getContentPane().add(resume, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 310, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -125,7 +149,7 @@ File SourceFile, myfile = null;
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 613, 90, 30));
 
-        jButton4.setText("Clear");
+        jButton4.setText("Refresh");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -148,6 +172,7 @@ File SourceFile, myfile = null;
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 700));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -159,22 +184,23 @@ this.dispose();// TODO add your handling code here:
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 main m=new main();
 m.setVisible(true);
-this.dispose();// TODO add your handling code here:
+this.dispose();
+// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      try {
+if (jButton4.getText().equals("update")) {
+            try {
                 com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
                 java.sql.Statement S = C.createStatement();
-                
-                S.executeUpdate("INSERT INTO `staff`( `name`, `address`, `image`, `resume`, `contactno`, `email`)"
-                      + "VALUES ('"+name.getText()+"','"+address.getText()+"','" + name.getText()+ ".jpg','"+resume.getText()+"',"+contactno.getText()+",'"+email.getText()+"')");
-                    JOptionPane.showMessageDialog(rootPane, " insert sucssessfully");
+                S.executeUpdate("UPDATE `staff` SET `id`='"+name.getText()+"','"+address.getText()+"','" + name.getText()+ ".jpg','"+resume.getText()+"',"+contactno.getText()+",'"+email.getText()+"'");
+                JOptionPane.showMessageDialog(rootPane, " update sucssessfully");
             } catch (SQLException ex) {
-                Logger.getLogger(staff.class.getName()).log(Level.SEVERE, null, ex);
-
+                Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
             }
-        try {
+
+        } else {
+            try {
 
             if (!SourceFile.exists()) {
                 System.out.println("Sourcefile doesn't Exist");
@@ -198,6 +224,23 @@ this.dispose();// TODO add your handling code here:
         } catch (IOException ex) {
             Logger.getLogger(staff.class.getName()).log(Level.SEVERE, null, ex);
         }
+             try {
+                com.mysql.jdbc.Connection C = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/apps?", "root", "");
+                java.sql.Statement S = C.createStatement();
+                
+                S.executeUpdate("INSERT INTO `staff`( `name`, `address`, `image`, `resume`, `contactno`, `email`)"
+                      + "VALUES ('"+name.getText()+"','"+address.getText()+"','" + name.getText()+ ".jpg','"+resume.getText()+"',"+contactno.getText()+",'"+email.getText()+"')");
+                    JOptionPane.showMessageDialog(rootPane, " insert sucssessfully");
+            } catch (SQLException ex) {
+                Logger.getLogger(staff.class.getName()).log(Level.SEVERE, null, ex);
+
+            }
+        }
+        
+        
+        
+       
+        
          // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
