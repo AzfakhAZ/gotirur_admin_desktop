@@ -34,32 +34,18 @@ public class login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
         login = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Technodroid");
         setAlwaysOnTop(true);
-        setPreferredSize(new java.awt.Dimension(434, 330));
+        setPreferredSize(new java.awt.Dimension(600, 510));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("username");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 110, 30));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("parssword");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 162, 90, 30));
-        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 170, 30));
+        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 280, 50));
 
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,9 +57,9 @@ public class login extends javax.swing.JFrame {
                 passwordKeyPressed(evt);
             }
         });
-        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 170, 30));
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 280, 50));
 
-        login.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        login.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         login.setText("LOGIN");
         login.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         login.addActionListener(new java.awt.event.ActionListener() {
@@ -81,16 +67,10 @@ public class login extends javax.swing.JFrame {
                 loginActionPerformed(evt);
             }
         });
-        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 130, 50));
+        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, 120, 40));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/technodroid/Login-Manager.png"))); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 110, 140));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Use\\Documents\\icons\\download.jpg")); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 90));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Use\\Documents\\icons\\wallnew.png")); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 500, 340));
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\apps\\technodroid\\src\\technodroid\\login.jpg")); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 620, 590));
 
         pack();
         setLocationRelativeTo(null);
@@ -201,11 +181,7 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JButton login;
     private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;

@@ -293,7 +293,7 @@ pic.setIcon(new ImageIcon("C:\\wamp\\www\\gotirur\\products\\" + productname1 + 
 
         getContentPane().add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, 350, 300));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Use\\Documents\\icons\\wall.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/technodroid/wall.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 680));
 
         jMenu1.setText("File");
